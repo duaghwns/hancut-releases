@@ -17,7 +17,7 @@ if [ -n "${HANCUT_DEST:-}" ]; then DEST="$HANCUT_DEST"; mkdir -p "$DEST"     # �
 elif [ -w /Applications ]; then DEST="/Applications"
 else DEST="$HOME/Applications"; mkdir -p "$DEST"; fi
 
-say "▶ 한컷 내려받는 중… (약 400MB)"
+say "▶ 한컷 내려받는 중… (약 320MB)"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 curl -fL --progress-bar -o "$TMP/$ASSET" "$URL"

@@ -11,6 +11,7 @@
 **Homebrew**
 
 ```bash
+brew trust duaghwns/tap        # 처음 한 번 (개인 tap 신뢰 등록)
 brew install --cask duaghwns/tap/hancut
 ```
 
