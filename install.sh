@@ -20,7 +20,7 @@ else DEST="$HOME/Applications"; mkdir -p "$DEST"; fi
 say "▶ 한컷 내려받는 중… (약 320MB)"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-curl -fL --progress-bar -o "$TMP/$ASSET" "$URL"
+curl -fL --retry 3 --retry-delay 3 --progress-bar -o "$TMP/$ASSET" "$URL"
 
 say "▶ $DEST 에 설치 중…"
 ditto -x -k "$TMP/$ASSET" "$TMP"
