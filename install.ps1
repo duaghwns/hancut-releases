@@ -29,12 +29,16 @@ try {
     Move-Item (Join-Path $tmp 'Hancut') $dest
     Get-ChildItem $dest -Recurse | Unblock-File      # 인터넷에서 받은 파일 표시 해제
 
-    # 시작 메뉴 바로가기
-    $lnk = Join-Path ([Environment]::GetFolderPath('Programs')) '한컷.lnk'
-    $sh = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)
+    # 시작 메뉴 바로가기: WScript.Shell은 한글 파일 이름을 저장하지 못하는 경우가 있어(영문 Windows 등)
+    # 영문 이름으로 만든 뒤 한글 이름으로 바꾼다. 바꾸지 못해도 설치는 계속한다.
+    $menu = [Environment]::GetFolderPath('Programs')
+    $tmpLnk = Join-Path $menu 'Hancut.lnk'
+    $sh = (New-Object -ComObject WScript.Shell).CreateShortcut($tmpLnk)
     $sh.TargetPath = Join-Path $dest 'Hancut.exe'
     $sh.WorkingDirectory = $dest
+    $sh.Description = '한컷 Hancut'
     $sh.Save()
+    try { Move-Item -LiteralPath $tmpLnk -Destination (Join-Path $menu '한컷.lnk') -Force } catch { }
 
     Write-Host "✓ 설치 완료: $dest\Hancut.exe"
     Write-Host '  시작 메뉴에서 ''한컷''을 실행하세요.'
