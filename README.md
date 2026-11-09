@@ -21,11 +21,20 @@ brew install --cask duaghwns/tap/hancut
 curl -fsSL https://raw.githubusercontent.com/duaghwns/hancut-releases/main/install.sh | bash
 ```
 
+**Windows** (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/duaghwns/hancut-releases/main/install.ps1 | iex
+```
+
+`%LOCALAPPDATA%\Programs\Hancut`에 설치되고, 시작 메뉴에 **한컷** 바로가기가 생깁니다. 관리자 권한은 필요 없습니다. 직접 받으려면 [Releases](https://github.com/duaghwns/hancut-releases/releases/latest)에서 `Hancut-windows-x64.zip`을 받아 압축을 풀고 `Hancut.exe`를 실행하세요. 처음 실행할 때 'Windows의 PC 보호' 창이 뜨면 **추가 정보 → 실행**을 누르면 됩니다(코드 서명을 하지 않은 앱이라서).
+
 직접 받으려면 [Releases](https://github.com/duaghwns/hancut-releases/releases/latest)에서 `Hancut-macos-arm64.zip`을 받아 `Hancut.app`을 응용 프로그램 폴더로 옮기세요. 브라우저로 받은 경우에는 처음 실행할 때 앱을 우클릭한 뒤 **열기**를 눌러야 합니다(Apple 공증을 받지 않은 앱이라서).
 
 **요구 사항**
-- Apple Silicon Mac (M1 이상), macOS 12 이상
-- `exiftool`: 촬영 시각과 AF 위치를 읽는 데 씁니다. brew와 curl로 설치하면 자동으로 함께 설치됩니다.
+- macOS: Apple Silicon Mac (M1 이상), macOS 12 이상
+- Windows: 64비트 Windows 10/11
+- `exiftool`: 촬영 시각과 AF 위치를 읽는 데 씁니다. Mac은 brew와 curl로 설치하면 자동으로 함께 설치되고, Windows판에는 앱에 들어 있습니다.
 - 처음 분석할 때 AI 모델(약 600MB)을 한 번 내려받습니다.
 
 ## 기능
@@ -48,7 +57,9 @@ curl -fsSL https://raw.githubusercontent.com/duaghwns/hancut-releases/main/insta
 brew uninstall --cask --zap hancut      # brew로 설치한 경우
 ```
 
-curl이나 직접 설치한 경우에는 `Hancut.app`을 휴지통으로 옮기면 됩니다. 분석 캐시까지 지우려면 아래 폴더도 삭제하세요.
+Windows는 `%LOCALAPPDATA%\Programs\Hancut` 폴더와 시작 메뉴의 한컷 바로가기를 지우면 됩니다. 분석 캐시는 `%LOCALAPPDATA%\Hancut`에 있습니다.
+
+Mac에서 curl이나 직접 설치한 경우에는 `Hancut.app`을 휴지통으로 옮기면 됩니다. 분석 캐시까지 지우려면 아래 폴더도 삭제하세요.
 - `~/Library/Caches/Hancut`
 - `~/Library/Application Support/Hancut`
 
