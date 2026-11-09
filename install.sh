@@ -13,7 +13,9 @@ fail() { printf '\033[31m✗ %s\033[0m\n' "$*" >&2; exit 1; }
 [ "$(uname -s)" = "Darwin" ] || fail "한컷은 현재 macOS만 지원합니다."
 [ "$(uname -m)" = "arm64" ] || fail "Apple Silicon Mac(M1 이상)이 필요합니다."
 
-if [ -w /Applications ]; then DEST="/Applications"; else DEST="$HOME/Applications"; mkdir -p "$DEST"; fi
+if [ -n "${HANCUT_DEST:-}" ]; then DEST="$HANCUT_DEST"; mkdir -p "$DEST"     # 설치 위치 지정 (선택)
+elif [ -w /Applications ]; then DEST="/Applications"
+else DEST="$HOME/Applications"; mkdir -p "$DEST"; fi
 
 say "▶ 한컷 내려받는 중… (약 400MB)"
 TMP="$(mktemp -d)"
